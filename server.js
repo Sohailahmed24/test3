@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const request = require('request');
 const dotenv = require('dotenv');
+const path=require("path")
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Handle requests to the root URL
 app.get('/', (req, res) => {
@@ -38,6 +40,9 @@ app.use('/', (req, res) => {
 
     // Forward the request to the actual URL
     req.pipe(request(url)).pipe(res);
+});
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || 4000;
