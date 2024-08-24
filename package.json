@@ -6,7 +6,7 @@
     "start": "concurrently \"npm run start-react\" \"npm run start-server\"",
     "start-react": "parcel index.html",
     "start-server": "node server.js",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir dist"
   },
   "author": "",
   "license": "ISC",
